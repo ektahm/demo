@@ -1,0 +1,18 @@
+<template>
+    <div class="slds-scrollable" style="height:15rem;width:30rem">
+    <template if:true={data}>
+        <lightning-card class="grid" title="Subscriber Opportunity Detail">
+            <template for:each={data} for:item="opp">				 
+                <lightning-card class="cards"  key={opp.Id} title={opp.AccountId} icon-name="standard:opportunity">
+                    <div class="outer">
+                        <div class ="inner"> 
+                           <b> Name: </b> {opp.Name} </br>
+                            <b>Type: </b>{opp.Type}  
+                        </div>
+                    </div>
+                </lightning-card>
+            </template>
+        </lightning-card>
+    </template>
+</div>
+</template>

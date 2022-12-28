@@ -1,0 +1,30 @@
+<template>
+    <lightning-layout>
+        
+        <div class="slds-align_absolute-center" style="height:4rem">
+            <div class="slds-box slds-box_x-small slds-theme_shade slds-theme_alert-texture">
+            <lightning-button style="margin-right: 5px" label="Previous" 
+            icon-name="utility:chevronleft"
+            onclick={previousHandler}
+            disabled={disablePrevious}></lightning-button>
+
+            <lightning-button  style="margin-right: 5px" label="First" 
+            onclick={firstHandler} ></lightning-button>
+
+            <lightning-button style="margin-right: 5px" label="Center" 
+            onclick={CenterHandler} ></lightning-button>
+
+            <lightning-button style="margin-right: 5px" label="Last" 
+            onclick={lastHandler} ></lightning-button>
+
+            <lightning-button style="margin-right: 5px" label="Next" 
+            icon-name="utility:chevronright"
+            icon-position="right"
+            onclick={nextHandler}
+            disabled={disableNext}></lightning-button>
+        
+            <p class="slds-badge">Display {currentPage} of {totalPage} Page</p>
+        </div>
+    </div>
+    </lightning-layout>
+</template>

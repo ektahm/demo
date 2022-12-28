@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+
+    <masterLabel>CountingUpdate</masterLabel>
+    <isExposed>true</isExposed>
+    <description>This Lightning Message Channel pass to count value</description>
+
+    <lightningMessageFields>
+        <fieldName>Operator</fieldName>
+        <description>This Is Operator for Add,Sbstact,Nultiplication</description>
+    </lightningMessageFields>
+ 
+    <lightningMessageFields>
+        <fieldName>constant</fieldName>
+        <description>This Is number For Add,Substract,multipy</description>
+    </lightningMessageFields>
+ 
+    
+</LightningMessageChannel>

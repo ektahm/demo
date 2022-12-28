@@ -1,0 +1,25 @@
+
+.cards { 
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+ /* grid-gap: 10px;*/
+  align-items: stretch;
+  }
+.template{
+  background: rgb(249, 248, 243);
+}
+.inner {
+  background: rgb(194, 194, 190);
+  border-radius: 10px; 
+  
+  /*margin: 10px 10px 0 10px;*/
+}
+.outer {
+  border-style: solid;
+  border-width: thin;
+  border-color: rgb(20, 22, 20);
+  border-radius: 10px;   
+}
+b{
+  font-size: 15px;
+}

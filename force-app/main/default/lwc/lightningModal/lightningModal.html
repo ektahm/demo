@@ -1,0 +1,146 @@
+<template>
+    <template if:true={loader}>
+        <lightning-spinner alternative-text="Loading..." size="small"></lightning-spinner>
+    </template>
+    <div class="slds-box slds-theme_default">
+        <lightning-card class="accounts" title="Accounts">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr class="slds-line-height_reset slds-text-title_caps">
+                        
+                        <th  class="slds-is-resizable" scope="col">
+                            <a class="sort-by" href="javascript:void(0);" role="button" tabindex="0" onclick={sortRecs} name="Name">
+                                Account Name
+                            </a>
+                        </th>
+                        <th  class="slds-is-resizable" scope="col">
+                            <a class="sort-by" href="javascript:void(0);" role="button" tabindex="0" onclick={sortRecs} name="Account Number">
+                                Account Number
+                            </a>
+                        </th>
+                       
+                        <th  class="slds-is-resizable" scope="col">
+                            <a class="sort-by" href="javascript:void(0);" role="button" tabindex="0" onclick={sortRecs} >
+                                Phone
+                            </a>
+                          
+                        </th>
+
+                        <th  class="slds-is-resizable" scope="col">
+                            <a class="sort-by" href="javascript:void(0);" role="button" tabindex="0" onclick={sortRecs} name="Industry">
+                                Industry  
+                            </a>
+                        </th>
+                        
+                        <th  class="slds-is-resizable" scope="col">
+
+                        </th>
+                        
+                    </tr>
+                </thead>
+
+                <tbody class ="table-body" style='height: 330px; display: block; overflow-y: scroll;   ' >
+                    <template if:true={accounts}>
+                        <template for:each={accounts} for:item="acc">
+                           
+                            <tr key={acc.Id}  data-id={acc.Id}  onclick={onDoubleClickEdit}>
+                                <!--<td scope="row">
+                                    
+                                    <template if:true={acc.IsEdited}>
+                                        <lightning-input type="checkbox"   checked={showFields}  onchange={handleChange} > </lightning-input>
+                                    </template>
+                                </td>-->
+                                <td data-label="Name" scope="row">
+                                    <template if:false={acc.IsEdited}>
+                                        <div class="slds-cell-wrap">{acc.Name}</div>
+                                    </template>                          
+                                    <template if:true={acc.IsEdited}>
+                                        <lightning-input class ="slds-m-left_x-small" label="Name" data-id={acc.Id} value={acc.Name}  variant="label-hidden" onchange={handleNameChange}></lightning-input>
+                                    </template>
+                                </td>
+
+                                <td data-label="Account Number" scope="row">
+                                    <template if:false={acc.IsEdited}>
+                                        <div class="slds-cell-wrap">{acc.AccountNumber}</div>
+                                    </template>                          
+                                    <template if:true={acc.IsEdited}>
+                                        <lightning-input class ="slds-m-left_x-small" label="Account Number" data-id={acc.Id} value={acc.AccountNumber}  variant="label-hidden" onchange={handleAccountNumberChange}></lightning-input>
+                                    </template>
+                                </td>
+
+                                <td data-label="Phone" scope="row">
+                                    <template if:false={acc.IsEdited}>
+                                        <div class="slds-cell-wrap">{acc.Phone}</div>
+                                    </template>                          
+                                    <template if:true={acc.IsEdited}>
+                                        <lightning-input class ="slds-m-left_x-small" label="Phone" data-id={acc.Id} value={acc.Phone}  variant="label-hidden" onchange={handlePhoneChange}></lightning-input>
+                                    </template>
+                                </td>
+
+                                <td data-label="Industry" scope="row">
+                                    <template if:false={acc.IsEdited}>
+                                        <div class="slds-cell-wrap">{acc.Industry}</div>
+                                    </template>                          
+                                    <template if:true={acc.IsEdited}>
+                                        <!-- show nd get picklist value using select option....
+                                            <select class="slds-select" onchange={handleIndustryChange}>
+                                            <option value="acc.Industry"></option>                
+                                              <template for:each={selectTargetValues.data} for:item="selectOptItem">
+                                                 <option key={selectOptItem.custFldvalue} value={selectOptItem.custFldvalue}  >
+                                                   {selectOptItem.custFldlabel}
+                                                 </option>
+                                            </template>
+                                      </select>-->
+                                      <template if:true={industryValues.data}>
+                                        <lightning-combobox value={acc.Industry} data-id={acc.Id}
+                                            options={industryValues.data.values} onchange={handleIndustryChange}>
+                                        </lightning-combobox>
+                                        </template>
+                                    </template>
+                                </td>
+
+                               
+
+                                <td scope="row"> 
+                                    
+                                        <lightning-input class="slds-m-right_x-small" type="checkbox" data-id={acc.Id} checked={acc.value}   onchange={handleChange} > </lightning-input>
+                                        <!--<lightning-button class="slds-m-center_xx-small" icon-name="utility:delete"    style="margin: 10px;" onclick={handleDelete}></lightning-button>-->
+                                    
+                                </td> 
+                            </tr>
+                        </template>
+                    </template>    
+                </tbody>
+            </table>
+        </lightning-card>
+        <div class="slds-align_absolute-center"> 
+            <div class="slds-p-right_xx-small">
+                     
+                <lightning-button label="Prev"
+                                    onclick={handlePrev}
+                                    disabled={isPrev}
+                                    variant="brand"
+                                    icon-name="utility:back"
+                                    name="prev"></lightning-button>  
+            </div>
+            <span class="slds-badge slds-badge_lightest">
+                Total Record:- {totalRecords} | Page {pageNumber} of {totalPages}
+            </span>
+            <div class="slds-p-left_xx-small">
+                <lightning-button label="Next"
+                                    onclick={handleNext}
+                                    disabled={isNext}
+                                    variant="brand"
+                                    icon-name="utility:forward"
+                                    icon-position="right"
+                                    name="next"></lightning-button>
+            </div>
+        </div>
+            <div class="slds-align_absolute-center" if:true={isEdited}>
+                <lightning-button class="button update" variant="brand"  label="Update" style="margin: 10px;" onclick={handleUpdate}></lightning-button>
+                <lightning-button class="button Delete" variant="brand"  label="Delete" style="margin: 10px;" onclick={handleDelete}></lightning-button>
+                <lightning-button class="button cancle" variant="brand"  label="Cancel" style="margin: 10px;" onclick={handleCancle}></lightning-button>
+            </div>
+    </div>
+    
+</template>

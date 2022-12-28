@@ -1,0 +1,41 @@
+<template>
+    <lightning-card title="Accounts" icon-name="custom:custom63">
+            <div class="slds-var-m-left_small" style="width: 500px">
+                   <!-- <lightning-combobox 
+                        name="Filter" 
+                        label= "Filter By Date" 
+                        value={filterVal} 
+                        options={filterOption}
+                        onchange={handleFilterChange}>
+                    </lightning-combobox>-->
+                    <lightning-layout-item  padding="around-small" >
+                        <!--Input text to Search Account-->
+                       <lightning-input type="search" label="Enter Account Name To Search"
+                           value={searchKey} 
+                           onchange={handelSearchKey}> 
+                       </lightning-input>
+                   </lightning-layout-item >
+            </div>
+       
+        <div style="height: 400px;">
+            <lightning-datatable class="hide-header-action style-header-row"
+                                    key-field="id" 
+                                    data={account}
+                                    hide-checkbox-column="true"
+                                    columns={columns}
+                                    sorted-by={sortBy}
+                                     sorted-direction={sortDirection}
+                                     onsort={doSorting}
+                                    onrowaction={handleAccountAction}>
+            </lightning-datatable>
+    
+                <c-model-pop-up record-id={accountId} getobjectapiname="Account" onmycustomevent={handleRefresh}></c-model-pop-up>
+                <c-delete-model-pop-up  ondeleteevent={handleDelete}></c-delete-model-pop-up>
+                <!-- <c-confirmation-dialog-promises></c-confirmation-dialog-promises>-->
+        </div>
+    </lightning-card>
+    
+        <lightning-card>
+            <c-paginator records={lstAccount} onupdate={updateDataHandler}></c-paginator>
+        </lightning-card>
+    </template>

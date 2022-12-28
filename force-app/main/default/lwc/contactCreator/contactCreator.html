@@ -1,0 +1,31 @@
+<template>
+   
+<lightning-accordion allow-multiple-sections-open active-section-name="Create Account Record">
+    <lightning-accordion-section name="Create Contact Record" label="Create Contact Record">
+        <lightning-card title="Create Contact Record" icon-name="standard:contact">
+            <lightning-record-form
+                object-api-name={objectApiName}
+                fields={fields}
+                onsuccess={handleSuccess}>
+            </lightning-record-form>
+        </lightning-card>
+    </lightning-accordion-section>
+    <!--Reusable Component-->
+    <lightning-accordion-section name="Create Account Record" label="Create Account Record">
+        <c-helloworld></c-helloworld>
+    </lightning-accordion-section>
+
+    <lightning-accordion-section name="Breadcrumbs" label="Breadcrumbs">
+        <lightning-breadcrumbs>
+            <lightning-breadcrumb
+                label="Parent Account"
+                href="http://example.com/parent">
+            </lightning-breadcrumb>
+            <lightning-breadcrumb
+                label="Case"
+                href="https://developer.salesforce.com/docs/component-library/bundle/lightning-breadcrumbs/example">
+            </lightning-breadcrumb>
+        </lightning-breadcrumbs>
+    </lightning-accordion-section>    
+</lightning-accordion>    
+</template>

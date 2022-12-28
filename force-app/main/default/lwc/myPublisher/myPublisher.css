@@ -1,0 +1,10 @@
+.button {
+    background: #e21b1b;
+    color: rgb(240, 15, 15);
+    float: left;
+    text-align: center;
+    font-size: 10px;
+    cursor: pointer;
+    transition: 0.1s;
+    border-radius: 15px;
+  }
